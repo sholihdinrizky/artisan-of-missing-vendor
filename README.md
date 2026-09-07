@@ -31,7 +31,8 @@ php artisan key:generate
 
 ### 3. Migrasi Database & Seeder
 ```bash
-php artisan migrate
+php artisan key:generate
+php artisan migrate --force
 ```
 
 ### 4. Build Aset Frontend
