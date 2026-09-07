@@ -1,4 +1,4 @@
-# Team 10 — Pemrograman Berbasis Kerangka Kerja (PBKK)
+# Team 10  Pemrograman Berbasis Kerangka Kerja (PBKK)
 
 Proyek aplikasi web official Kelompok 10 PBKK Departemen Teknik Informatika ITS, Fakultas Teknologi Elektro dan Informatika Cerdas (FTEIC).
 
@@ -24,9 +24,13 @@ npm install
 
 ### 2. Setup Environment (`.env`)
 Copy file `.env.example` menjadi `.env` lalu generate `APP_KEY`:
+- Windows (PowerShell / CMD):
+```bash
+copy .env.example .env
+```
+- Linux / Git Bash / macOS:
 ```bash
 cp .env.example .env
-php artisan key:generate
 ```
 
 ### 3. Migrasi Database & Seeder
@@ -35,12 +39,7 @@ php artisan key:generate
 php artisan migrate --force
 ```
 
-### 4. Build Aset Frontend
-```bash
-npm run build
-```
-
-### 5. Jalankan Server Lokal
+### 4. Jalankan Server Lokal
 Gunakan perintah otomatis composer untuk menjalankan PHP Server & Vite Dev Server secara bersamaan:
 ```bash
 composer run dev
