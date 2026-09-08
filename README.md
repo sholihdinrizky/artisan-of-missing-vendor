@@ -1,78 +1,52 @@
 # artisan-of-missing-vendor 🧙‍♂️
 
-Proyek latihan mandiri Laravel — dibuat untuk memahami alur dasar **URL → Route → Controller → View**, sekaligus jadi tempat coba-coba sebelum ngerjain tugas beneran. Namanya diambil dari drama nyata: `vendor/autoload.php` yang ilang berkali-kali pas awal setup. 😅
+This is a small Laravel project I put together on my own, mostly to actually understand what happens between typing a URL and seeing something on the screen — the whole Route → Controller → View flow. It's also basically a warm-up sandbox before tackling the real assignment. The name comes from something that actually happened to me: `vendor/autoload.php` kept going missing every time I thought I was done setting things up, so here we are.
 
----
+Built with Laravel (PHP 8.5) on the backend, Inertia.js + React for the frontend, some custom CSS, and SQLite as the database — nothing fancy, just enough to get things running.
 
-## 🛠️ Tech Stack
+## Getting it running locally
 
-- **Backend**: Laravel (PHP 8.5)
-- **Frontend Engine**: Inertia.js + React
-- **Styling**: Custom CSS
-- **Database**: SQLite
+Clone the repo, then install the usual suspects:
 
----
-
-## 🚀 Cara Menjalankan di Lokal
-
-Setelah clone repositori ini, ikuti langkah berikut:
-
-### 1. Install Dependensi PHP & Node
 ```bash
 composer install
 pnpm install
 ```
 
-### 2. Setup Environment (`.env`)
-Copy file `.env.example` menjadi `.env`, lalu generate `APP_KEY`:
+Copy the environment file and generate a key:
+
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-### 3. Migrasi Database
+Set up the database:
+
 ```bash
 touch database/database.sqlite
 php artisan migrate
 ```
 
-### 4. Jalankan Server Lokal
-Buka dua terminal terpisah:
+Then open two terminals and run these side by side:
+
 ```bash
 php artisan serve
 ```
+
 ```bash
 pnpm dev
 ```
 
-Buka browser di `http://127.0.0.1:8000`.
+Once both are running, the app should be live at `http://127.0.0.1:8000`.
 
----
+## What's actually in here
 
-## 📌 Daftar Fitur & Rute Aplikasi
+The homepage lives at `/`, with an About section you can jump to at `/#tentang`. There's a `/team` page for the project/members section, and the main feature — a working calculator — sits at `/kalkulator`, where you can punch in numbers through a form. Under the hood it hits a dynamic route, `/hitung/{angka1}/{angka2}/{operasi}` (e.g. `/hitung/10/5/kali`), which is what actually does the math.
 
-- **GET `/`** — Home
-- **GET `/#tentang`** — Section About (scroll di halaman Home)
-- **GET `/team`** — Halaman Project / Anggota
-- **GET `/kalkulator`** — Kalkulator interaktif (form input angka & operasi)
-- **GET `/hitung/{angka1}/{angka2}/{operasi}`** — Rute dinamis kalkulator (contoh: `/hitung/10/5/kali`)
+## A note to future me
 
----
+I almost lost an entire afternoon to environment issues that had nothing to do with actual coding — PHP wasn't installed, then `composer install` failed because `ext-dom` and `ext-xml` were missing, then migrations failed because `pdo_sqlite` wasn't there either, then Vite complained about a missing manifest because I forgot to run the dev server, and at one point the whole thing just refused to connect because I'd accidentally closed the terminal running `php artisan serve`. None of it was hard, it just took forever to figure out one error at a time. Lesson learned: don't close the terminal that's keeping your server alive.
 
-## 🐛 Drama Selama Setup (Log Pribadi)
+## License
 
-Buat pengingat diri sendiri kalau suatu saat harus setup ulang dari nol:
-
-1. PHP belum terinstall → `sudo apt install php8.5-cli`
-2. `composer install` gagal karena `ext-dom` & `ext-xml` belum ada → install extension yang kurang
-3. `php artisan migrate` gagal, `pdo_sqlite` belum ada → `sudo apt install php8.5-sqlite3`
-4. Vite manifest not found → lupa jalanin `pnpm dev` / `pnpm build`
-5. Server ke-refuse connection → lupa `php artisan serve` masih jalan atau enggak
-
-Moral of the story: **jangan tutup terminal yang lagi jalanin server.**
-
----
-
-## 📄 Lisensi
-
-Proyek latihan pribadi, bebas dipakai buat belajar.
+Personal practice project — feel free to use it if it's helpful for learning.
