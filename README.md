@@ -1,60 +1,78 @@
-# Team 10  Pemrograman Berbasis Kerangka Kerja (PBKK)
+# artisan-of-missing-vendor 🧙‍♂️
 
-Proyek aplikasi web official Kelompok 10 PBKK Departemen Teknik Informatika ITS, Fakultas Teknologi Elektro dan Informatika Cerdas (FTEIC).
+Proyek latihan mandiri Laravel — dibuat untuk memahami alur dasar **URL → Route → Controller → View**, sekaligus jadi tempat coba-coba sebelum ngerjain tugas beneran. Namanya diambil dari drama nyata: `vendor/autoload.php` yang ilang berkali-kali pas awal setup. 😅
 
 ---
 
-## 🛠️ Tech Stack & Framework
-- **Backend**: Laravel 12 (PHP 8.3+)
-- **Frontend Engine**: Inertia.js v3 + React 19 / Laravel Blade Templates
-- **Styling**: Tailwind CSS v4 + Custom Retro-Modern Design (`team10.css`)
+## 🛠️ Tech Stack
+
+- **Backend**: Laravel (PHP 8.5)
+- **Frontend Engine**: Inertia.js + React
+- **Styling**: Custom CSS
 - **Database**: SQLite
 
 ---
 
-## 🚀 Cara Menjalankan di Lokal (Panduan untuk Anggota Tim)
+## 🚀 Cara Menjalankan di Lokal
 
-Setelah me-clone repositori dari GitHub, ikuti langkah-langkah di bawah ini:
+Setelah clone repositori ini, ikuti langkah berikut:
 
 ### 1. Install Dependensi PHP & Node
 ```bash
 composer install
-npm install
+pnpm install
 ```
 
 ### 2. Setup Environment (`.env`)
-Copy file `.env.example` menjadi `.env` lalu generate `APP_KEY`:
-- Windows (PowerShell / CMD):
-```bash
-copy .env.example .env
-```
-- Linux / Git Bash / macOS:
+Copy file `.env.example` menjadi `.env`, lalu generate `APP_KEY`:
 ```bash
 cp .env.example .env
+php artisan key:generate
 ```
 
-### 3. Migrasi Database & Seeder
+### 3. Migrasi Database
 ```bash
-php artisan key:generate
-php artisan migrate --force
+touch database/database.sqlite
+php artisan migrate
 ```
 
 ### 4. Jalankan Server Lokal
-Gunakan perintah otomatis composer untuk menjalankan PHP Server & Vite Dev Server secara bersamaan:
+Buka dua terminal terpisah:
 ```bash
-composer run dev
+php artisan serve
+```
+```bash
+pnpm dev
 ```
 
-Buka browser di `http://127.0.0.1:8000` atau `http://localhost:8000`.
+Buka browser di `http://127.0.0.1:8000`.
 
 ---
 
 ## 📌 Daftar Fitur & Rute Aplikasi
 
-- **GET `/`** — Home (Beranda & Pengenalan Tim 10)
-- **GET `/about`** — Profil Departemen Teknik Informatika ITS, FTEIC, Visi Misi, 6 Prodi, 6 Lab
-- **GET `/project-idea`** *(atau `/project`)* — Rencana Proyek Akhir Sub-Theme **Personalized Agentic AI for Intelligent Job Discovery and Application Preparation**
-- **GET `/kalkulator`** — Fitur Kalkulator Interaktif & Form Uji Perhitungan
-- **GET `/hitung/{angka1}/{angka2}/{operasi}`** — Bonus Rute Dinamis (Contoh: `/hitung/10/5/kali`)
-- **GET `/team`** — Profil 6 Anggota Kelompok 10 DTIF ITS
-- **GET `/team/{id}`** — Detail Kontak & Biodata Anggota Tim
+- **GET `/`** — Home
+- **GET `/#tentang`** — Section About (scroll di halaman Home)
+- **GET `/team`** — Halaman Project / Anggota
+- **GET `/kalkulator`** — Kalkulator interaktif (form input angka & operasi)
+- **GET `/hitung/{angka1}/{angka2}/{operasi}`** — Rute dinamis kalkulator (contoh: `/hitung/10/5/kali`)
+
+---
+
+## 🐛 Drama Selama Setup (Log Pribadi)
+
+Buat pengingat diri sendiri kalau suatu saat harus setup ulang dari nol:
+
+1. PHP belum terinstall → `sudo apt install php8.5-cli`
+2. `composer install` gagal karena `ext-dom` & `ext-xml` belum ada → install extension yang kurang
+3. `php artisan migrate` gagal, `pdo_sqlite` belum ada → `sudo apt install php8.5-sqlite3`
+4. Vite manifest not found → lupa jalanin `pnpm dev` / `pnpm build`
+5. Server ke-refuse connection → lupa `php artisan serve` masih jalan atau enggak
+
+Moral of the story: **jangan tutup terminal yang lagi jalanin server.**
+
+---
+
+## 📄 Lisensi
+
+Proyek latihan pribadi, bebas dipakai buat belajar.
