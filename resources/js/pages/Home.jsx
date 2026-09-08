@@ -22,8 +22,6 @@ const VALUES = [
 ];
 
 export default function Home({ memberCount }) {
-  // Scroll to #tentang if the page was loaded/navigated to with that hash
-  // (e.g. clicking "Tentang" in the nav from another page).
   useEffect(() => {
     if (window.location.hash) {
       const el = document.getElementById(window.location.hash.slice(1));
